@@ -109,6 +109,25 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         return cell
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //  var photoViewController = segue.destination as! PhotoViewController
+        let cell = sender as! UITableViewCell
+        
+        if let indexPath = tableView.indexPath(for: cell)
+        {
+            let post = posts[indexPath.row]
+            let photoDetailsViewController = segue.destination as! PhotoDetailsViewController
+            photoDetailsViewController.post = post
+        }
+        //tableView.deselectRow(at: indexPath, animated: true)
+        //photoViewController.image = self.imageView.image
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
